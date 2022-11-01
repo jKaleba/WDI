@@ -61,7 +61,7 @@ def ex3SieveFaster(n: int):
     sieve = [True for _ in range(n)]
     sieve[0] = sieve[1] = False
 
-    for i in range(2, isqrt(n)):
+    for i in range(2, isqrt(n) + 1):
         if sieve[i]:
             for j in range(i * i, n, i):
                 sieve[j] = False
