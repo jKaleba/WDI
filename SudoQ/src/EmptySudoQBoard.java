@@ -4,19 +4,17 @@ class EmptySudoQBoard extends SudoQBoard {
 
     public EmptySudoQBoard(int size) {
 
-        board = new ArrayList<>(size);
+        super(size);
 
-        for(var row : board) {
+        System.out.println(size);
+        for(int i = 0; i < size; i++) {
 
-            row = new ArrayList<Integer>(size);
-            for(int i = 0; i < size; i++) {
-                row.set(i, 0);
+            ArrayList<Integer> row = new ArrayList<>(size);
+            for(int j = 0; j < size; j++) {
+                row.add(0);
             }
+            board.add(row);
         }
-
-
-
-
     }
 
 

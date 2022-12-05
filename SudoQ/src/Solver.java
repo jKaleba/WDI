@@ -29,7 +29,7 @@ class Solver {
             board.show();
         }
         else {
-            
+
 
 
         }
