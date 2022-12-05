@@ -6,7 +6,6 @@ class EmptySudoQBoard extends SudoQBoard {
 
         super(size);
 
-        System.out.println(size);
         for(int i = 0; i < size; i++) {
 
             ArrayList<Integer> row = new ArrayList<>(size);
@@ -16,6 +15,4 @@ class EmptySudoQBoard extends SudoQBoard {
             board.add(row);
         }
     }
-
-
 }

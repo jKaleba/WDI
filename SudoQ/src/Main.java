@@ -6,5 +6,4 @@ class Main {
         sudoQBoard.show();
 
     }
-
 }

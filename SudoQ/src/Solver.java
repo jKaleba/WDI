@@ -1,11 +1,6 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-
 class Solver {
 
-
     private static boolean stop;
-
 
     public static void solveSudoku(Board board) {
 
@@ -16,9 +11,9 @@ class Solver {
         while(board.board.get((int)(i / 9)).get(0) != 0) {
             i++;
         }
+        if(i == board.board.size() * board.board.size())  return;
 
-        recursiveSolve(board, i, 0, 0);
-
+        recursiveSolve(board, i, (int)(i / 9), i % 9);
     }
 
 
@@ -30,28 +25,20 @@ class Solver {
         }
         else {
 
-
+//            TODO
 
         }
-
-
-
     }
 
 
-    private static void possibleMoves(Board board) {
+    private static int[] nextMove(Board board, int row, int col) {
 
-        ArrayList<Integer> dx = new ArrayList<>(
-                Arrays.asList(-1, -1, 1, 1, 1)
-        );
-        ArrayList<Integer> dy = new ArrayList<>(Arrays.asList(
-                1, 1, 1, 1, 1)
-        );
+        do {
+            row = row + (int)((col + 1) / 9);
+            col = (col + 1) % 9;
+        }
+        while(row < 9);
 
-
+        return row == 9 ? new int[]{0, 0} : new int[]{row, col};
     }
-
-
-
-
 }
