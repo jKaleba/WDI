@@ -27,9 +27,7 @@ class Solver {
             }
         }
 
-        if(n != 81) {
-            recursiveSolve(board, n, (i / 9), i % 9);
-        }
+        recursiveSolve(board, n, (i / 9), i % 9);
     }
 
     private static void recursiveSolve(Board board, int n, int row, int col) {
@@ -55,6 +53,7 @@ class Solver {
                 }
             }
         }
+
         board.board.get(row).set(col, 0);
     }
 

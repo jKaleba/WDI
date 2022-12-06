@@ -20,6 +20,17 @@ class SudoQBoard extends Board {
     }
 
     private void downloadBoard(Scanner scanner) {
+
+        int differentBoards = scanner.nextInt();
+
+        int currBoard = new Random().nextInt(0, differentBoards);
+
+        for(int i = 0; i < currBoard; i++) {
+            for(int j = 0; j < super.size * super.size; j++) {
+                scanner.nextInt();
+            }
+        }
+
         for(int i = 0; i < this.size; i++) {
             for(int j = 0; j < this.size; j++) {
                 board.get(i).add(scanner.nextInt());
@@ -34,8 +45,5 @@ class SudoQBoard extends Board {
             int empty = random.nextInt(0, size * size);
             board.get(empty / 9).set(empty % 9, 0);
         }
-
-
-
     }
 }
