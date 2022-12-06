@@ -11,14 +11,14 @@ class Solver {
 
         int i = 0;
 
-        while(board.board.get((i / 9)).get(i % 9) != 0) {
+        while(board.getBoard().get((i / 9)).get(i % 9) != 0) {
             i++;
         }
 
-        if(i == board.board.size() * board.board.size())  return;
+        if(i == board.getBoard().size() * board.getBoard().size())  return;
 
         int n = 0;
-        for(ArrayList<Integer> row : board.board) {
+        for(ArrayList<Integer> row : board.getBoard()) {
 
             for(int element : row) {
                 if(element != 0) {
@@ -45,7 +45,7 @@ class Solver {
                 if(stop) break;
 
                 if(values[i]) {
-                    board.board.get(row).set(col, i);
+                    board.getBoard().get(row).set(col, i);
 
                     int[] free = nextMove(board, row, col);
 
@@ -54,18 +54,18 @@ class Solver {
             }
         }
 
-        board.board.get(row).set(col, 0);
+        board.getBoard().get(row).set(col, 0);
     }
 
     private static boolean[] possibleValues(Board board, int row, int col) {
 
-        boolean[] defaults = new boolean[board.board.size() + 1];
+        boolean[] defaults = new boolean[board.getBoard().size() + 1];
         Arrays.fill(defaults, true);
 
         try{
-            for(int i = 0; i < board.board.size(); i++) {
-                defaults[board.board.get(row).get(i)] = false;
-                defaults[board.board.get(i).get(col)] = false;
+            for(int i = 0; i < board.getBoard().size(); i++) {
+                defaults[board.getBoard().get(row).get(i)] = false;
+                defaults[board.getBoard().get(i).get(col)] = false;
             }
         }
         catch(Exception e) {
@@ -77,7 +77,7 @@ class Solver {
 
         for(int i = startRow; i < startRow + 3; i++) {
             for(int j = startCol; j < startCol + 3; j++) {
-                defaults[board.board.get(i).get(j)] = false;
+                defaults[board.getBoard().get(i).get(j)] = false;
             }
         }
 
@@ -90,7 +90,7 @@ class Solver {
             row = row + ((col + 1) / 9);
             col = (col + 1) % 9;
         }
-        while(row < 9 && board.board.get(row).get(col) != 0);
+        while(row < 9 && board.getBoard().get(row).get(col) != 0);
 
         return row == 9 ? new int[]{-1, -1} : new int[]{row, col};
     }

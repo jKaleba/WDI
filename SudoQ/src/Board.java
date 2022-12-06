@@ -17,6 +17,10 @@ class Board {
         }
     }
 
+    public ArrayList<ArrayList<Integer>> getBoard() {
+        return this.board;
+    }
+
     public void show() {
 
         for(int i = 0; i < 3 * board.size(); i++) {
