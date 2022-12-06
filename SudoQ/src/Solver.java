@@ -11,7 +11,7 @@ class Solver {
 
         int i = 0;
 
-        while(board.board.get((i / 9)).get(0) != 0) {
+        while(board.board.get((i / 9)).get(i % 9) != 0) {
             i++;
         }
 
@@ -39,6 +39,7 @@ class Solver {
             board.show();
             return;
         }
+
         else {
             boolean[] values = possibleValues(board, row, col);
             for(int i = 1; i < values.length; i++) {
