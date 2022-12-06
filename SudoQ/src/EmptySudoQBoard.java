@@ -1,6 +1,4 @@
-import java.util.ArrayList;
-
-class EmptySudoQBoard extends SudoQBoard {
+class EmptySudoQBoard extends Board {
 
     public EmptySudoQBoard(int size) {
 
@@ -8,11 +6,9 @@ class EmptySudoQBoard extends SudoQBoard {
 
         for(int i = 0; i < size; i++) {
 
-            ArrayList<Integer> row = new ArrayList<>(size);
             for(int j = 0; j < size; j++) {
-                row.add(0);
+                board.get(i).add(0);
             }
-            board.add(row);
         }
     }
 }

@@ -2,11 +2,19 @@ import java.util.ArrayList;
 
 class Board {
 
-    ArrayList<ArrayList<Integer>> board;
+    protected ArrayList<ArrayList<Integer>> board;
+    int size;
 
     public Board(int size) {
 
         board = new ArrayList<ArrayList<Integer>>(size);
+        this.size = size;
+
+        for(int i = 0; i < size; i++) {
+
+            ArrayList<Integer> row = new ArrayList<>();
+            board.add(row);
+        }
     }
 
     public void show() {
