@@ -12,7 +12,7 @@ class Board {
 
         for(int i = 0; i < size; i++) {
 
-            ArrayList<Integer> row = new ArrayList<>();
+            ArrayList<Integer> row = new ArrayList<>(size);
             board.add(row);
         }
     }

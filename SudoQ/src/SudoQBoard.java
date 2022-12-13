@@ -1,3 +1,5 @@
+import org.jetbrains.annotations.NotNull;
+
 import java.io.File;
 import java.util.Random;
 import java.util.Scanner;
@@ -19,7 +21,7 @@ class SudoQBoard extends Board {
         }
     }
 
-    private void downloadBoard(Scanner scanner) {
+    private void downloadBoard(@NotNull Scanner scanner) {
 
         int differentBoards = scanner.nextInt();
 
@@ -37,13 +39,13 @@ class SudoQBoard extends Board {
             }
         }
 
-        Random random = new Random();
-        int emptyAmount = random.nextInt(40, 55);
-
-        for(int i = 0; i < emptyAmount; i++) {
-
-            int empty = random.nextInt(0, size * size);
-            board.get(empty / 9).set(empty % 9, 0);
-        }
+//        Random random = new Random();
+//        int emptyAmount = random.nextInt(40, 55);
+//
+//        for(int i = 0; i < emptyAmount; i++) {
+//
+//            int empty = random.nextInt(0, size * size);
+//            board.get(empty / 9).set(empty % 9, 0);
+//        }
     }
 }
