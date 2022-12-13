@@ -94,4 +94,4 @@ class Solver {
 
         return row == 9 ? new int[]{-1, -1} : new int[]{row, col};
     }
-}
+} 

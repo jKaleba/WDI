@@ -4,7 +4,7 @@ class Board {
 
     protected ArrayList<ArrayList<Integer>> board;
     int size;
-
+ 
     public Board(int size) {
 
         board = new ArrayList<ArrayList<Integer>>(size);
