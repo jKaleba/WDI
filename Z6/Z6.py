@@ -1,3 +1,4 @@
+import math
 import random
 import time
 from math import isqrt, log, sqrt
@@ -833,8 +834,39 @@ def ex32SameSumSubsets(data: list, k, index=0, s1=0, s2=0, n1=0, n2=0) -> bool:
            ex32SameSumSubsets(data, k, index + 1, s1, s2, n1, n2)
 
 
+def ex6Faster(collection: list[int]) -> int:
+    return ex6FasterR(collection)[1]
+
+
+def myMin(a: (int, int), b: (int, int)) -> (int, int):
+    if a[0] < b[0]:
+        return a
+
+    elif a[0] == b[0]:
+        return a if a[1] <= b[1] else b
+
+    else:
+        return b
+
+
+def ex6FasterR(collection: list[int], index=0, n=0, indexSum=0, elSum=0) -> (int, int):
+    if indexSum == elSum != 0:
+        return n, elSum
+
+    if index == len(collection):
+        return math.inf, elSum
+
+    return myMin(ex6FasterR(collection, index + 1, n + 1, indexSum + index, elSum + collection[index]),
+                 ex6FasterR(collection, index + 1, n, indexSum, elSum))
+
+
 if __name__ == '__main__':
-    a = [1, 7, 3, 5, 11, 2]
-    # supposed to print either 8 or 10, depends on the condition when there is more than one
-    # subset with the minimal elements inside -> this one looks for lower value
-    print(ex6SmallestSubset(a))
+    asd = [1, 7, 3, 5, 11, 2, 3, 6, 5, 3, 2, 6, 1, 3, 6, 4, 20, 18, 29, 30]
+
+    startTime = time.time()
+    print(ex6SmallestSubset(asd))
+    print(time.time() - startTime)
+
+    startTime = time.time()
+    print(ex6Faster(asd))
+    print(time.time() - startTime)
