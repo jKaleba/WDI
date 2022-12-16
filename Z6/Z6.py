@@ -357,6 +357,32 @@ def subsetR(collection: list[int], subset: list[(bool, int, int)], index=0, n=0,
     subsetR(collection, subset, index + 1, n, indexSum, elSum)
 
 
+def ex6Faster(collection: list[int]) -> int:
+    return ex6FasterR(collection)[1]
+
+
+def myMin(a: (int, int), b: (int, int)) -> (int, int):
+    if a[0] < b[0]:
+        return a
+
+    elif a[0] == b[0]:
+        return a if a[1] <= b[1] else b
+
+    else:
+        return b
+
+
+def ex6FasterR(collection: list[int], index=0, n=0, indexSum=0, elSum=0) -> (int, int):
+    if indexSum == elSum != 0:
+        return n, elSum
+
+    if index == len(collection):
+        return math.inf, elSum
+
+    return myMin(ex6FasterR(collection, index + 1, n + 1, indexSum + index, elSum + collection[index]),
+                 ex6FasterR(collection, index + 1, n, indexSum, elSum))
+
+
 def ex7Weight(n: int, weights: list[int], index=0) -> bool:
     if n == 0:
         return True
@@ -392,15 +418,20 @@ def ex9WeightWithPrint(n: int, weights: list[int], index=0, result=[]):
            or ex9WeightWithPrint(n + weights[index], weights, index + 1, result + [-weights[index]])
 
 
-# TODO
-def ex10MatrixDeterminant(matrix: list[list[int]]) -> int:
+def ex10MatrixDeterminant(matrix: list[list[int]], depth=0) -> int:
     n = len(matrix)
 
-    return matrixR(matrix, n)
+    if n == 1 and depth == len(matrix[0]) - 1:
+        return matrix[0][depth]
 
+    stageSum = 0
+    for i in range(n):
 
-def matrixR(matrix: list, n, rowInd=0, colInd=0):
-    return 0
+        stageSum += matrix[i][depth] * (-1) ** (i + 2 * depth) * ex10MatrixDeterminant(matrix[:i] + matrix[i + 1:], depth + 1)
+                                                  # added 2 times depth, because although I added + depth for column,
+                                                  # since there are deleted rows, must also add + depth for them
+
+    return stageSum
 
 
 def ex13NumberDivision(n: int, start=1, result=[], min=-1):
@@ -564,7 +595,7 @@ def kingAnyR(board, row, col, direction):
 
     further = False
     for i in range(3):
-        move = possibleMoves(board, row, col, i)
+        move = possibleMovesAny(board, row, col, i, direction)
         if move:
             further = kingR(board, move[0], move[1])
 
@@ -834,39 +865,26 @@ def ex32SameSumSubsets(data: list, k, index=0, s1=0, s2=0, n1=0, n2=0) -> bool:
            ex32SameSumSubsets(data, k, index + 1, s1, s2, n1, n2)
 
 
-def ex6Faster(collection: list[int]) -> int:
-    return ex6FasterR(collection)[1]
-
-
-def myMin(a: (int, int), b: (int, int)) -> (int, int):
-    if a[0] < b[0]:
-        return a
-
-    elif a[0] == b[0]:
-        return a if a[1] <= b[1] else b
-
-    else:
-        return b
-
-
-def ex6FasterR(collection: list[int], index=0, n=0, indexSum=0, elSum=0) -> (int, int):
-    if indexSum == elSum != 0:
-        return n, elSum
-
-    if index == len(collection):
-        return math.inf, elSum
-
-    return myMin(ex6FasterR(collection, index + 1, n + 1, indexSum + index, elSum + collection[index]),
-                 ex6FasterR(collection, index + 1, n, indexSum, elSum))
-
 
 if __name__ == '__main__':
     asd = [1, 7, 3, 5, 11, 2, 3, 6, 5, 3, 2, 6, 1, 3, 6, 4, 20, 18, 29, 30]
 
-    startTime = time.time()
-    print(ex6SmallestSubset(asd))
-    print(time.time() - startTime)
+    trialMatrix = [[1, 2, 3],
+                   [4, 5, 6],
+                   [7, 8, 9]]
 
-    startTime = time.time()
-    print(ex6Faster(asd))
-    print(time.time() - startTime)
+    trialMatrix2 = [[1, 2],
+                    [3, 4]]
+
+    trialMatrix3 = [[1, 0, 0],
+                    [0, 1, 0],
+                    [0, 0, 1]]
+
+    trialMatrix4 = [[5, 7, 2],
+                    [9, 1, 2],
+                    [2, 1, 1]]
+
+    print(ex10MatrixDeterminant(trialMatrix)) # 0
+    print(ex10MatrixDeterminant(trialMatrix2)) # -2
+    print(ex10MatrixDeterminant(trialMatrix3)) # 1
+    print(ex10MatrixDeterminant(trialMatrix4)) # -26
