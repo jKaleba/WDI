@@ -323,14 +323,37 @@ def ex5SequenceCut(sequence: list[int]):
     return False
 
 
-# TODO
-def ex6SmallestSubset(collection: list[int]):
-    for i in range(1, len(collection) + 1):
+def ex6SmallestSubset(collection: list[int]) -> int:
+    subset = [(False, 0, 0) for _ in range(2 ** len(collection))]
+
+    subsetR(collection, subset)
+
+    currMin = 10 ** 5
+    minIndex = 0
+
+    for i in range(len(subset)):
+        if subset[i][0]:
+
+            if subset[i][1] < currMin or subset[i][1] == currMin and subset[i][2] < subset[minIndex][2]:
+                currMin = subset[i][1]
+                minIndex = i
+
+    return subset[minIndex][2]
+
+
+subsetIndex = 0
+
+
+def subsetR(collection: list[int], subset: list[(bool, int, int)], index=0, n=0, indexSum=0, elSum=0):
+    global subsetIndex
+
+    if index == len(collection):
+        subset[subsetIndex] = (elSum == indexSum != 0, n, elSum)
+        subsetIndex += 1
         return
 
-
-def ex6Recursion(collection: list[int], ):
-    return
+    subsetR(collection, subset, index + 1, n + 1, indexSum + index, elSum + collection[index])
+    subsetR(collection, subset, index + 1, n, indexSum, elSum)
 
 
 def ex7Weight(n: int, weights: list[int], index=0) -> bool:
@@ -370,6 +393,12 @@ def ex9WeightWithPrint(n: int, weights: list[int], index=0, result=[]):
 
 # TODO
 def ex10MatrixDeterminant(matrix: list[list[int]]) -> int:
+    n = len(matrix)
+
+    return matrixR(matrix, n)
+
+
+def matrixR(matrix: list, n, rowInd=0, colInd=0):
     return 0
 
 
@@ -606,7 +635,6 @@ def ex24TheLowestDistance(points: list[(int, int)], n) -> float:
     mass = [0 for _ in range(2 ** n)]
     massCentrePoints(points)
 
-
     minDistance = 10 ** 5
     for i in range(len(mass) - 1):
 
@@ -633,8 +661,6 @@ def massCentrePoints(points: list[(int, int)], index=0, sumx=0, sumy=0, n=0):
 
     massCentrePoints(points, index + 1, sumx + points[index], sumy + points[index], n + 1)
     massCentrePoints(points, index + 1, sumx, sumy, n)
-
-
 
 
 def ex26PossibleBuiltNumbers(A: int, B: int, result=[1]) -> int:
@@ -807,32 +833,8 @@ def ex32SameSumSubsets(data: list, k, index=0, s1=0, s2=0, n1=0, n2=0) -> bool:
            ex32SameSumSubsets(data, k, index + 1, s1, s2, n1, n2)
 
 
-def NWD(a, b):
-    while b:
-        c = a % b
-        a = b
-        b = c
-
-    return a
-
-
-def ex3Kol(board: list[list[int]]):
-    return 0
-
-
 if __name__ == '__main__':
-    print(ex26PossibleBuiltNumbers(2, 3))
-
-    binaryR(32)
-    print()
-    print(binaryRR(1023))
-
-    coll = [2, 3, 5, 7, 15]
-    print(ex28CollectionDivision(coll))
-
-    print(ex31NonemptySubsetsOfDivisors(60))
-
-    trial = [i for i in range(1, 20)]
-    print(ex32SameSumSubsets(trial, 7))
-
-    print(NWD(5, 10))
+    a = [1, 7, 3, 5, 11, 2]
+    # supposed to print either 8 or 10, depends on the condition when there is more than one
+    # subset with the minimal elements inside -> this one looks for lower value
+    print(ex6SmallestSubset(a))
