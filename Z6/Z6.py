@@ -434,6 +434,38 @@ def ex10MatrixDeterminant(matrix: list[list[int]], depth=0) -> int:
     return stageSum
 
 
+def ex11NNumbersWithGivenProduct(numbers: list[int], product, N, index=0):
+
+    if N == 1:
+        n1Sum = 0
+        for i in range(index, len(numbers)):
+            if product == numbers[i]:
+                n1Sum += 1
+
+        return n1Sum
+
+    nSum = 0
+    for i in range(index, len(numbers) - N + 1):
+        if product % numbers[i] == 0:
+
+            nSum += ex11NNumbersWithGivenProduct(numbers, product // numbers[i], N - 1, index + 1)
+
+    return nSum
+
+
+def ex12NNumbersWithGivenProduct(numbers: list[int], product, N, index=0, result=[]):
+
+    if N == 1:
+        for i in range(index, len(numbers)):
+            if product == numbers[i]:
+                print(result + [numbers[i]])
+
+    else:
+        for i in range(index, len(numbers) - N + 1):
+            if product % numbers[i] == 0:
+                ex12NNumbersWithGivenProduct(numbers, product // numbers[i], N - 1, index + 1, result + [numbers[i]])
+
+
 def ex13NumberDivision(n: int, start=1, result=[], min=-1):
     if len(result):
         min = result[-2]
@@ -865,26 +897,23 @@ def ex32SameSumSubsets(data: list, k, index=0, s1=0, s2=0, n1=0, n2=0) -> bool:
            ex32SameSumSubsets(data, k, index + 1, s1, s2, n1, n2)
 
 
-
 if __name__ == '__main__':
-    asd = [1, 7, 3, 5, 11, 2, 3, 6, 5, 3, 2, 6, 1, 3, 6, 4, 20, 18, 29, 30]
 
-    trialMatrix = [[1, 2, 3],
-                   [4, 5, 6],
-                   [7, 8, 9]]
+    asd = [1, 1, 1, 1, 1, 1, 1, 1, 8, 9]
 
-    trialMatrix2 = [[1, 2],
-                    [3, 4]]
+    print(ex11NNumbersWithGivenProduct(asd, 72, 2)) # 1
+    print(ex11NNumbersWithGivenProduct(asd, 72, 3)) # 8
+    print(ex11NNumbersWithGivenProduct(asd, 72, 4)) # 49
+    print()
 
-    trialMatrix3 = [[1, 0, 0],
-                    [0, 1, 0],
-                    [0, 0, 1]]
-
-    trialMatrix4 = [[5, 7, 2],
-                    [9, 1, 2],
-                    [2, 1, 1]]
-
-    print(ex10MatrixDeterminant(trialMatrix)) # 0
-    print(ex10MatrixDeterminant(trialMatrix2)) # -2
-    print(ex10MatrixDeterminant(trialMatrix3)) # 1
-    print(ex10MatrixDeterminant(trialMatrix4)) # -26
+    ex12NNumbersWithGivenProduct(asd, 72, 2) # [8, 9]
+    print()
+    ex12NNumbersWithGivenProduct(asd, 72, 3)
+    # [1, 8, 9]
+    # [1, 8, 9]
+    # [1, 8, 9]
+    # [1, 8, 9]
+    # [1, 8, 9]
+    # [1, 8, 9]
+    # [1, 8, 9]
+    # [1, 8, 9]
