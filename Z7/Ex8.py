@@ -1,3 +1,4 @@
+import time
 from random import randint
 
 
@@ -28,8 +29,8 @@ class LinkedList:
             g = g.next
         print(g)
 
-
-    def append(self, newValue, pointer=None):
+    # in case of speeding it up, return Node, which can then be used in order to immediately append next elements
+    def append(self, newValue, pointer=None) -> Node:
 
         if pointer is None:
             pointer = self.pointer
@@ -37,10 +38,9 @@ class LinkedList:
         if pointer.next is None:
             newNode = Node(newValue)
             pointer.next = newNode
-            return
+            return newNode
 
-        self.append(newValue, pointer.next)
-
+        return self.append(newValue, pointer.next)
 
     def sieve(self):
         curr = self.getGuardian()
@@ -49,14 +49,18 @@ class LinkedList:
             curr = curr.next
 
 
-
 if __name__ == '__main__':
+    startTime = time.time()
     mList = LinkedList()
-    for i in range(10):
-        mList.append(i)
+    last = mList.append(0)
+    for i in range(1, 2000):
+        newLast = mList.append(i, last)
+        last = newLast
 
     mList.print()
 
     mList.sieve()
 
     mList.print()
+
+    print(time.time() - startTime)
