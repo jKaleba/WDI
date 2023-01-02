@@ -1,3 +1,4 @@
+from random import randint
 
 class Node:
 
@@ -59,17 +60,20 @@ def printList(g):
 
 if __name__ == '__main__':
 
-
     guardian = Node(0)
-    add(guardian, 7)
+    for i in range(randint(5, 50)):
+
+        newValue = randint(1, 100)
+        add(guardian, newValue)
 
     printList(guardian)
     print("--")
 
-    add(guardian, 3)
-    printList(guardian)
+    for i in range(randint(5, 20)):
 
-    print(isIn(guardian, 5))
+        guess = randint(1, 100)
+        if isIn(guardian, guess):
+            print("Found in: ", guess)
+            delete(guardian, guess)
 
-    delete(guardian, 7)
     printList(guardian)
