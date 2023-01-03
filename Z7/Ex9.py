@@ -72,6 +72,7 @@ if __name__ == '__main__':
 
     number.print()
 
-    number.increment()
-
-    number.print()
+    while True:
+        input()
+        number.increment()
+        number.print()
