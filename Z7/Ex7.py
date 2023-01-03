@@ -54,8 +54,6 @@ class LinkedList:
         return val
 
 
-
-
 if __name__ == '__main__':
     mList = LinkedList()
     for i in range(10):
