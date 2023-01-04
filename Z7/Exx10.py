@@ -88,7 +88,7 @@ if __name__ == '__main__':
 
     num1, num2 = Number(), Number()
 
-    for i in range(1, 10):
+    for i in range(randint(5, 15)):
         num1.appendDigit(randint(1, 9))
         num2.appendDigit(randint(1, 9))
 
