@@ -52,57 +52,14 @@ class Number:
     @staticmethod
     def add(number1, number2):
 
-        digit1 = number1.getGuardian().next
-        digit2 = number2.getGuardian().next
+        digit1 = number1.getGuardian()
+        digit2 = number2.getGuardian()
 
-        def addR(digitPointer1, digitPointer2):                    
-            
-            if digitPointer1.next is None and digitPointer2.next is None:
-                newNumber = Number()
-                newNumber.insert((digitPointer1.value + digitPointer2.value) % 10)
-
-                rest = (digitPointer1.value + digitPointer2.value) // 10
-                return newNumber, rest
-
-            if digitPointer1.next is None:
-                return addR(digitPointer1, digitPointer2.next)
-
-            if digitPointer2.next is None:
-                return addR(digitPointer1.next, digitPointer2)
-
-            newNumber, currRest = addR(digitPointer1.next, digitPointer2.next)
-            newNumber.insert((digitPointer1.value + digitPointer2.value + currRest) % 10)
-
-            rest = (digitPointer1.value + digitPointer2.value + currRest) // 10
-            return newNumber, rest
-
-        numerList, y = addR(digit1, digit2)
-        if y != 0:
-            numerList.insert(y)
+        def addR(digitPointer1, digitPointer2):
+            return
         
-        if digit1 is None and digit2 is None:
-            return numerList
         
-        if digit1 is None:
-            currGuard = numerList.getGuardian()
-            numerList.setNextGuardian(digit2.next)
             
-            while digit2.next is not None:
-                digit2 = digit2.next
-            
-            digit2.next = currGuard        
-        
-        if digit2 is None:
-            currGuard = numerList.getGuardian()
-            numerList.setNextGuardian(digit1.next)
-            
-            while digit1.next is not None:
-                digit1 = digit1.next
-            
-            digit1.next = currGuard
-            
-        
-        return numerList
 
 
 freeLine = lambda: print("---")
@@ -110,6 +67,7 @@ freeLine = lambda: print("---")
 if __name__ == '__main__':
 
     num1, num2 = Number(), Number()
+    
 
     for i in range(randint(3, 5)):
         num1.appendDigit(randint(1, 9))
@@ -119,9 +77,5 @@ if __name__ == '__main__':
 
     mSum: Number = Number.add(num1, num2)
 
-    num1.print("Number1: ")
-    freeLine()
-    num2.print("Number2: ")
-    freeLine()
 
     mSum.print("Sum equals:")
