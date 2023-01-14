@@ -38,7 +38,13 @@ def add(p: Node, q: Node):
     guardian = Node(-1)
     current = guardian
     rest = 0
-    while True:
+    while p is not None and q is not None:
+
+        if p is None:
+            p = Node(0)
+
+        if q is None:
+            q = Node(0)
 
         sum = Node(p.value + q.value + rest)
         rest = sum.value // 10
@@ -50,14 +56,6 @@ def add(p: Node, q: Node):
         p = p.next
         q = q.next
 
-        if p is None and q is None:
-            break
-
-        if p is None:
-            p = Node(0)
-
-        if q is None:
-            q = Node(0)
 
     if rest > 0:
         sum = Node(rest)
