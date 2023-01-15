@@ -29,7 +29,7 @@ def aBiggerThB(a, b, index=0):
 
 
 def add(pointer: Node, string):
-    # pointer initially is guardian or list is not to be empty
+    # pointer initially is guardian
 
     if pointer.next is None:
         pointer.next = Node(string)
@@ -64,4 +64,3 @@ if __name__ == '__main__':
     while current is not None:
         print(current.value)
         current = current.next
-
