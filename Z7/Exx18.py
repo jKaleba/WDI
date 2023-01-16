@@ -8,17 +8,6 @@ class Node:
         self.next = next
 
 
-def onesInBinary(n):
-    counter = 0
-    while n > 0:
-        if n % 2 == 1:
-            counter += 1
-
-        n //= 2
-
-    return counter
-
-
 def sieveListV5(pointer: Node):
 
     current = pointer
