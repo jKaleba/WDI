@@ -57,7 +57,6 @@ def magic(T, n=0, used=[]):
     if equalSum(T) and n == 2:
         for a in T:
             print(a)
-        print(n, used)
         print()
         print("Positive - row, negative - column.")
 
@@ -83,7 +82,4 @@ if __name__ == '__main__':
         [5, 15, 4, 2]
         ]
 
-    arr2 = arr[:]
-
-    print(magic(arr2))
-
+    print(magic(arr))
