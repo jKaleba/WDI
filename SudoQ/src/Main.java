@@ -10,6 +10,8 @@ class Main {
         sudoQBoard.show();
         Solver.solveSudoku(sudoQBoard);
 
+
+
 //        TODO solved sudoku board saving in file for other games
 
     }
